@@ -1,4 +1,15 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
+import { AdminService } from './admin.service';
+import { AdminDto } from './admin.dto';
 
-@Controller('admin')
-export class AdminController {}
+@Controller('login')
+export class AdminController {
+    constructor(
+        private adminService: AdminService,
+    ) {}
+
+    @Post()
+    login(@Body() userData: AdminDto) {
+        return this.adminService.checkUser(userData);
+    }
+}
