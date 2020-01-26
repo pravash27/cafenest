@@ -36,10 +36,10 @@ export class AdminEntity {
         }, process.env.SECRET, {expiresIn: '7d'},
         );
     }
-     responseObject() {
-         const {id, username, email, token} = this;
-         const responseObject = {id, username, email, token};
-         responseObject.token = token;
-         return responseObject;
-     }
+    responseObject() {
+        const {id, username, email, token} = this;
+        const responseObject = {id, username, email, token};
+        responseObject.token = token;
+        return responseObject;
+    }
 }
