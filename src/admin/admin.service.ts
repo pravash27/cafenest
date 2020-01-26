@@ -15,6 +15,10 @@ export class AdminService {
         if (!userdata || !(userdata.comparePassword(data.password))) {
             throw new HttpException('User Not Found', 404);
         }
-        return userdata;
+        return userdata.responseObject();
+    }
+
+    async allUser() {
+        return await this.adminRepository.find();
     }
 }
