@@ -15,6 +15,12 @@ export class ProductCategoryController {
         return this.productCategoryService.showAll();
     }
 
+    @Get('enabled')
+    @UseGuards(new AuthGuard())
+    allEnabled(){
+        return this.productCategoryService.showEnabled();
+    }
+
     @Get(':id')
     @UseGuards(new AuthGuard())
     getOne(@Param('id') id: number){

@@ -4,4 +4,5 @@ export interface  AdminDto {
     password?: string;
     email?: string;
     userid?: number;
+    token?: string;
 }

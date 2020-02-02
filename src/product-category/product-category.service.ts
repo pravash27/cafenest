@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductCategoryEntity } from './product-category.entity';
 import { Repository } from 'typeorm';
@@ -13,20 +13,44 @@ export class ProductCategoryService {
     async showAll() {
         return await this.productCategoryRepository.find();
     }
+    
+    async showEnabled(){
+        return await this.productCategoryRepository.find({status:1});
+    }
 
     async showOne(id: number) {
         return await this.productCategoryRepository.findOne({id:id});
     }
 
-    async create(data: ProductCategoryDto){
-        const productCategory = await this.productCategoryRepository.create(data);
-        await this.productCategoryRepository.save(productCategory);
-        return productCategory;
+    async create(data: ProductCategoryDto) {
+        try {
+            const productCategory = await this.productCategoryRepository.create(data);
+            await this.productCategoryRepository.save(productCategory);
+            return productCategory;
+        } catch(e){
+            const error = {
+                "code": e.code,
+                "errno": e.errno,
+                "name": e.name,
+            }
+            throw new HttpException(error, 404);
+        }
+
     }
 
     async update(id: number, data: ProductCategoryDto) {
-        await this.productCategoryRepository.update({id:id}, data);
-        return await this.productCategoryRepository.findOne({id:id});
+        try{
+            await this.productCategoryRepository.update({id:id}, data);
+            return await this.productCategoryRepository.findOne({id:id});
+        }catch(e){
+            const error = {
+                "code": e.code,
+                "errno": e.errno,
+                "name": e.name,
+            }
+            throw new HttpException(error, 404);
+        }
+        
     }
 
     async destroy(id: number){
