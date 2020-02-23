@@ -21,6 +21,12 @@ export class ProductController {
         return this.productService.showEnabled();
     }
 
+    @Get('category/:id')
+    @UseGuards(new AuthGuard())
+    productByCategory(@Param() id: number){
+        return this.productService.showByCategory(id);
+    }
+
     @Get(':id')
     @UseGuards(new AuthGuard())
     getOne(@Param('id') id: number){

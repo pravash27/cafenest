@@ -11,18 +11,22 @@ export class ProductService {
     ) {}
 
     async showAll() {
-        return await this.productRepository.find({relations:['category','unit']});
+        return await this.productRepository.find({relations: ['category', 'unit']});
     }
 
     async showEnabled() {
-        return await this.productRepository.find({status:1});
+        return await this.productRepository.find({status: 1});
     }
 
     async showOne(id: number) {
-        return await this.productRepository.findOne({id:id});
+        return await this.productRepository.findOne({ id:id});
     }
 
-    async create(data: ProductDto){
+    async showByCategory(catId: number){
+        return await this.productRepository.find({where: {status: 1, category_id: catId}})
+    }
+
+    async create(data: ProductDto) {
         const productCategory = await this.productRepository.create(data);
         await this.productRepository.save(productCategory);
         return productCategory;
@@ -33,7 +37,7 @@ export class ProductService {
         return await this.productRepository.findOne({id:id});
     }
 
-    async destroy(id: number){
+    async destroy(id: number) {
         await this.productRepository.delete({id:id});
         return {status: true};
     }
