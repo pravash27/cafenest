@@ -1,13 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
-import { type } from "os";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { ProductCategoryEntity } from "src/product-category/product-category.entity";
 import { UnitEntity } from "src/unit/unit.entity";
+import { BillItemEntity } from "src/bill-item/bill-item.entity";
 
 @Entity('product')
 export class ProductEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
+    @OneToMany(type=>BillItemEntity,billItem => billItem.product)
+    billItem: BillItemEntity[]
+    
     @Column()
     category_id: number;
 

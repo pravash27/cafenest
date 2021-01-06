@@ -22,6 +22,12 @@ export class TableService {
         return await this.tableRepository.findOne({id:id});
     }
 
+    async showClearedTables(){
+        return await this.tableRepository.createQueryBuilder('table')
+        .leftJoinAndMapOne("table.billing","billing","billing","billing.table_id=table.id and billing.billstatus=0")
+        .getMany();
+    }
+
     async create(data: TableDto){
         try{
             const table = await this.tableRepository.create(data);

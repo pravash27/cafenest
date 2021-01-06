@@ -1,10 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { BillingEntity } from "src/billing/billing.entity";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 
 @Entity('table')
 export class TableEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
+    @OneToMany(type => BillingEntity, billing => billing.table)
+    billing: BillingEntity[]
     @Column({unique: true})
     name: string;
 

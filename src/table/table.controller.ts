@@ -12,9 +12,15 @@ export class TableController {
     @Get()
     @UseGuards(new AuthGuard())
     all(){
-        return this.tableService.showAll();
+        return this.tableService.showClearedTables();
     }
 
+    @Get('cleared')
+    @UseGuards(new AuthGuard())
+    allCleared(){
+        return this.tableService.showClearedTables();
+    }
+    
     @Get('enabled')
     @UseGuards(new AuthGuard())
     allEnabled(){

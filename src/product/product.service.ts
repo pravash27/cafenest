@@ -19,7 +19,7 @@ export class ProductService {
     }
 
     async showOne(id: number) {
-        return await this.productRepository.findOne({ id:id});
+        return await this.productRepository.findOne({ id:id });
     }
 
     async showByCategory(catId: number){

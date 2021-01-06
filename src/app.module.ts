@@ -7,8 +7,12 @@ import { ProductCategoryModule } from './product-category/product-category.modul
 import { UnitModule } from './unit/unit.module';
 import { TableModule } from './table/table.module';
 import { ProductModule } from './product/product.module';
+import { BillingModule } from './billing/billing.module';
+import { BillItemModule } from './bill-item/bill-item.module';
+import { CustomerModule } from './customer/customer.module';
+import { PaymentModule } from './payment/payment.module';
 @Module({
-  imports: [TypeOrmModule.forRoot(), AdminModule, ProductCategoryModule, UnitModule, TableModule, ProductModule],
+  imports: [TypeOrmModule.forRoot(), AdminModule, ProductCategoryModule, UnitModule, TableModule, ProductModule, BillingModule, BillItemModule, CustomerModule, PaymentModule],
   controllers: [AppController],
   providers: [AppService],
 })
